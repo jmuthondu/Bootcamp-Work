@@ -3,76 +3,97 @@
 import os
 import csv
 
-#initialize variables
-candidates = []
-num_votes = 0
-vote_counts = []
+# Define the variables
+sum_of_votes = 0
+khan = 0
+correy = 0
+li = 0
+otooley = 0
 
 # joining the path
-election_data = os.path.join("Resources", "election_data.csv")
+data = os.path.join("Resources", "election_data.csv")
 
 # open and read csv
 with open('election_data.csv', newline="") as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
     csv_header = next(csvfile)
-    # skip header row
-    print(f"Header: {csv_header}")
 
-#go line by line and process each vote
-    for line in csvreader:
+    for i in csvreader:
+        sum_of_votes += 1
 
-        #add to total number of votes
-        num_votes = num_votes + 1
+        # number of votes for each candidate
 
-        #candidate voted for
-        candidate = line[2]
-
-        #if candidate has other votes then add to vote tally
-        if candidate in candidates:
-            candidate_index = candidates.index(candidate)
-            vote_counts[candidate_index] = vote_counts[candidate_index] + 1
-        #else create new spot in list for candidate
+        if (i[2] == "Khan"):
+            khan += 1
+        elif (i[2] == "Correy"):
+            correy += 1
+        elif (i[2] == "Li"):
+            li += 1
         else:
-            candidates.append(candidate)
-            vote_counts.append(1)    
+            otooley += 1
 
-percentages = []
-max_votes = vote_counts[0]
-max_index = 0
-#find percentage of vote for each candidate and the winner
-for count in range(len(candidates)):
-    vote_percentage = vote_counts[count]/num_votes*100
-    percentages.append(vote_percentage)
-    if vote_counts[count] > max_votes:
-        max_votes = vote_counts[count]
-        print(max_votes)
-        max_index = count
-winner = candidates[max_index]
+    # percentage of votes received 
+    khan_percentage = khan / sum_of_votes
+    correy_percentage = correy / sum_of_votes
+    li_percentage = li / sum_of_votes
+    otooley_percentage = otooley / sum_of_votes
 
-#print results
+    #  winner of the election
+    election_winner = max(khan, correy, li, otooley)
+
+    if election_winner == khan:
+        winner = "Khan"
+    elif election_winner == correy:
+        winner == "Correy"
+    elif election_winner == li:
+        winner = "Li"
+    else:
+        winner = "O'Tooley"
+
+# Print the results of the election
 print("Election Results")
-print("--------------------------")
-print(f"Total Votes: {num_votes}")
-print("---------------------------")
-for count in range(len(candidates)):
-    print(f"{candidates[count]}: {percentages[count]}% ({vote_counts[count]})")
+
+print("-------------------------")
+
+print("Total Votes: " + str(sum_of_votes))
+
+print("-------------------------")
+
+print(f"Kahn: {khan_percentage:.3%}({khan})")
+
+print(f"Correy: {correy_percentage:.3%}({correy})")
+
+print(f"Li: {li_percentage:.3%}({li})")
+
+print(f"O'Tooley: {otooley_percentage:.3%}({otooley})")
+
+print("-------------------------")
+
 print(f"Winner: {winner}")
-print("---------------------------")
 
-write_file = f"pypoll_results_summary.txt"
+print("-------------------------")
 
-#open write file
-filewriter = open(write_file, mode = 'w')
+# Exports values to a text file
+file_writer = open("file_writerOutput.txt","w+")
 
-#print analysis to file
-filewriter.write("Election Results\n")
-filewriter.write("--------------------------\n")
-filewriter.write(f"Total Votes: {num_votes}\n")
-for count in range(len(candidates)):
-    filewriter.write(f"{candidates[count]}: {percentages[count]}% ({vote_counts[count]})\n")
-filewriter.write("---------------------------\n")
-filewriter.write(f"Winner: {winner}\n")
-filewriter.write("---------------------------\n")
+file_writer.write("Election Results")
 
-#close file
-filewriter.close()
+file_writer.write('\n' + f"-------------------------")
+
+file_writer.write('\n' + f"Total Votes: {sum_of_votes}")
+
+file_writer.write('\n' + f"-------------------------")
+
+file_writer.write('\n' + f"Kahn: {khan_percentage:.3%}({khan})")
+
+file_writer.write('\n' + f"Correy: {correy_percentage:.3%}({correy})")
+
+file_writer.write('\n' + f"Li: {li_percentage:.3%}({li})")
+
+file_writer.write('\n' + f"O'Tooley: {otooley_percentage:.3%}({otooley})")
+
+file_writer.write('\n' + f"-------------------------")
+
+file_writer.write('\n' + f"Winner: {winner}")
+
+file_writer.write('\n' + f"-------------------------")

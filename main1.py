@@ -1,4 +1,4 @@
-#import library
+	#import library
 import os
 import csv
 
@@ -6,72 +6,76 @@ import csv
 budget_data = os.path.join("Resources", "budget_data.csv")
 
 # open and read csv
-with open('budget_data.csv', newline="") as csvfile:
-    csvreader = csv.reader(csvfile, delimiter=",")
+with open('budgetdata.csv', newline="") as csvfile:
+    csv_reader = csv.reader(csvfile, delimiter=",")
     csv_header = next(csvfile)
-    # skip header row
+
+    # skiping the header row
     print(f"Header: {csv_header}")
 
-    # find net amount of profit and loss
-    P_L = []
-    months = []
+    # finding net amount of profit and loss
+    Profit_and_losses = []
+    list_of_months = []
 
-    #read through each row of data after header
-    for rows in csvreader:
-        P_L.append(int(rows[1]))
-        months.append(rows[0])
+    #reading through each row of data after header
+    for i in csv_reader:
+        Profit_and_losses.append(int(i[1]))
+        list_of_months.append(i[0])
 
-    # find revenue change
-    revenue_change = []
+    # Create an empty list of the revenue
+    revenue = []
 
-    for x in range(1, len(P_L)):
-        revenue_change.append((int(P_L[x]) - int(P_L[x-1])))
+# Looping through the to get the revenue
+    for i in range(1, len(Profit_and_losses)):
+        revenue.append((int(Profit_and_losses[i]) - int(Profit_and_losses[i-1])))
     
-    # calculate average revenue change
-    revenue_average = sum(revenue_change) / len(revenue_change)
+    # Find the average revenue change
+    average_revenue = sum(revenue) / len(revenue)
     
-    # calculate total length of months
-    total_months = len(months)
+    # Find the total length of months
+    total_length_of_months = len(list_of_months)
 
-    # greatest increase in revenue
-    greatest_increase = max(revenue_change)
-    # greatest decrease in revenue
-    greatest_decrease = min(revenue_change)
+    # Find the greatest increase in revenue
+    Max_revenue = max(revenue)
+
+    # Find the greatest decrease in revenue
+    Min_revenue = min(revenue)
 
 
     # print the Results
     print("Financial Analysis")
 
-    print("....................................................................................")
+    print("...............................................................")
 
-    print("total months: " + str(total_months))
+    print("Total months: " + str(total_length_of_months))
 
-    print("Total: " + "$" + str(sum(P_L)))
+    print("Total: " + "$" + str(sum(Profit_and_losses)))
 
-    print("Average change: " + "$" + str(revenue_average))
+    print("Average change: " + "$" + str(average_revenue))
 
-    print("Greatest Increase in Profits: " + str(months[revenue_change.index(max(revenue_change))+1]) + " " + "$" + str(greatest_increase))
+    print("Greatest Increase in Profits: " + str(list_of_months[revenue.index(max(revenue))+1]) + " " + "$" + str(Max_revenue))
 
-    print("Greatest Decrease in Profits: " + str(months[revenue_change.index(min(revenue_change))+1]) + " " + "$" + str(greatest_decrease))
+    print("Greatest Decrease in Profits: " + str(list_of_months[revenue.index(min(revenue))+1]) + " " + "$" + str(Min_revenue))
 
 
-    # output to a text file
+
+    #  text file output
 
     file = open("output.txt","w")
 
     file.write("Financial Analysis" + "\n")
 
-    file.write("...................................................................................." + "\n")
+    file.write("............................................................." + "\n")
 
-    file.write("total months: " + str(total_months) + "\n")
+    file.write("Total months: " + str(total_length_of_months) + "\n")
 
-    file.write("Total: " + "$" + str(sum(P_L)) + "\n")
+    file.write("Total: " + "$" + str(sum(Profit_and_losses)) + "\n")
 
-    file.write("Average change: " + "$" + str(revenue_average) + "\n")
+    file.write("Average change: " + "$" + str(average_revenue) + "\n")
 
-    file.write("Greatest Increase in Profits: " + str(months[revenue_change.index(max(revenue_change))+1]) + " " + "$" + str(greatest_increase) + "\n")
+    file.write("Greatest Increase in Profits: " + str(list_of_months[revenue.index(max(revenue))+1]) + " " + "$" + str(Max_revenue) + "\n")
 
-    file.write("Greatest Decrease in Profits: " + str(months[revenue_change.index(min(revenue_change))+1]) + " " + "$" + str(greatest_decrease) + "\n")
+    file.write("Greatest Decrease in Profits: " + str(list_of_months[revenue.index(min(revenue))+1]) + " " + "$" + str(Min_revenue) + "\n")
 
     file.close()
 
