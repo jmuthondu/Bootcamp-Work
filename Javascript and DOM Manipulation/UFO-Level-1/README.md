@@ -22,7 +22,7 @@ You can handle this... right? The planet Earth needs to know what we have found!
 
 4. Add your **html** files to this folder as well as your static folder containing your javascript. This will be the main script to run for analysis.
 
-5. Push the above
+5. Push the above changes to 
 
 ### Level 1: Automatic Table and Date Search (Required)
 
