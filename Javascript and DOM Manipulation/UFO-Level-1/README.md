@@ -16,7 +16,7 @@ You can handle this... right? The planet Earth needs to know what we have found!
 
 1. Create a new repository for this project called `javascript-challenge`. **Do not add this homework to an existing repository**.
 
-2. Clone
+2. Clone the
 
 3. Inside your local git repository, create a directory for the Javascript challenge. Use the folder names to correspond to the challenges: **UFO-level-1** and **UFO-level-2**.
 
