@@ -14,7 +14,7 @@ You can handle this... right? The planet Earth needs to know what we have found!
 
 ### Before You Begin
 
-1. Create a new repository for this project called `javascript-challenge`. **Do not add this homework to an existing repository**.
+1. Create for this project called `javascript-challenge`. **Do not add this homework to an existing repository**.
 
 2. Clone the new repository to your computer
 
