@@ -2,7 +2,7 @@
 # https://github.com/damnever/pigar
 
 # app.py: 11
-Flask == 1.1.1
+Flask == 2.3.2
 
 # app.py: 12
 Flask_SQLAlchemy == 2.4.1
